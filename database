@@ -1,0 +1,48 @@
+create database ProjectISAD
+go
+
+use ProjectISAD
+go
+
+--Authors table (tác giả)
+create table Authors(
+	authorID int IDENTITY(1,1) PRIMARY KEY,
+	authorName nvarchar(100),
+	birthday date
+);
+go
+
+--Publisher table(nhà xuất bản)
+create table Publishers(
+	publisherID int IDENTITY(1,1) PRIMARY KEY,
+	publisherName nvarchar(100),
+	numPhone int,
+	email varchar(100),
+	addresses nvarchar(200)
+);
+go
+
+--Locations table(vị trị trong thư viện)
+create table Locations(
+	locationID int IDENTITY(1,1) PRIMARY KEY,
+	shelf nvarchar(20),
+	[description] nvarchar(100)
+);
+go
+
+create table books(
+	bookID int IDENTITY(1,1) PRIMARY KEY,
+	bookName nvarchar(200),
+	decrisption nvarchar(2024),
+	authorID int,
+	quantity int,
+	price int,
+	publisherID int,
+	genre nvarchar(100),
+	major nvarchar(100),
+	locationID int,
+	FOREIGN KEY (authorID) REFERENCES Authors(authorID),
+	FOREIGN KEY (publisherID) REFERENCES Publishers(publisherID),
+	FOREIGN KEY (locationID) REFERENCES Locations(locationID)
+);
+go
